@@ -2,36 +2,22 @@
 import React, { useState } from 'react';
 import SideNav from '../SideNav';
 import { useRouter } from 'next/navigation';
+import ChatRoom from '../ChatRoom';
+import Notifications from '../Notifications';
+import Calender from '../Calender';
+import FileSharing from '../FileSharing';
+import UserProfile from '../UserProfile';
 
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNotificationTabOpen, setIsNotificationTabOpen] = useState(false);
-    const [currentView, setCurrentView] = useState('Tickets'); // Set default to 'Tickets'
+    const [currentView, setCurrentView] = useState('Tickets'); 
   
   const router = useRouter();
   
-  const toggleModal = () => {
-    setIsModalOpen((prev) => {
-      if (!prev) {
-        setIsNotificationTabOpen(false); 
-      }
-      return !prev;
-    });
-  };
   
-  const toggleNotifications = () => {
-    setIsNotificationTabOpen((prev) => {
-      if (!prev) {
-        setIsSidebarOpen(false); 
-        setIsModalOpen(false);
-      } else {
-        setIsSidebarOpen(true); 
-      }
-      return !prev;
-    });
-  };
   
   function Logout(): void {
     router.push("/components/LoginPage/")
@@ -46,21 +32,21 @@ const Layout = () => {
   const renderContent = () => {
     switch (currentView) {
       case 'Dashboard':
-        return <Tickets />;
+        return <ChatRoom />;
       case 'Tickets':
-        return <Tickets />;
+        return <Notifications />;
       case 'Agents':
-        return <UpdateProfile />; 
+        return <Calender />; 
       case 'Statistics':
-        return <AgentsStats />; 
+        return <FileSharing />; 
       case 'Notifications':
-          return <TicketNotifications/>;
+          return <UserProfile/>;
         
       case 'Settings':
-        return <Settings/>;
+        return <Calender/>;
 
       default:
-        return <UpdateProfile />;
+        return <Notifications />;
     }
   };
 
