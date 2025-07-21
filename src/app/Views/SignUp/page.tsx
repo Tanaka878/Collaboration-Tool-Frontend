@@ -10,25 +10,26 @@ export default function SignupPage() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/user/create-user", {
+      const response: Response = await fetch("http://localhost:8080/api/user/create-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      const result = await response.text();
+      const result: string = await response.text();
       setMessage(result);
     } catch (error) {
       console.error("Signup error:", error);
@@ -137,9 +138,7 @@ export default function SignupPage() {
                 Account Type
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                  {roleIcons[formData.role]}
-                </div>
+               
                 <select
                   name="role"
                   value={formData.role}
@@ -188,6 +187,8 @@ export default function SignupPage() {
                 </span>
               )}
             </button>
+
+
 
             {/* Terms and conditions note */}
             <p className="text-xs text-gray-500 text-center mt-4">
