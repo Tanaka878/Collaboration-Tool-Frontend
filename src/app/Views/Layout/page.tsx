@@ -8,6 +8,7 @@ import Calender from '../Calender';
 import FileSharing from '../FileSharing';
 import UserProfile from '../UserProfile';
 import WelcomeScreen from '../Welcome';
+import ProjectForm from '../ProjectForm';
 
 
 const Layout = () => {
@@ -23,13 +24,13 @@ const Layout = () => {
 
   const renderContent = () => {
     switch (currentView) {
-      case 'Dashboard':
-        return <ChatRoom />;
+      case 'Project':
+        return <ProjectForm/>;
       case 'Tickets':
         return <WelcomeScreen />;
       case 'Agents':
         return <Calender />; 
-      case 'Statistics':
+      case 'File Sharing':
         return <FileSharing />; 
       case 'Notifications':
           return <UserProfile/>;
