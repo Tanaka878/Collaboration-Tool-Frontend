@@ -14,7 +14,7 @@ export default function ChatPage() {
   const [email, setEmail] = useState<string | null>("");
 
   useEffect(() => {
-    setEmail(localStorage.getItem("email"));
+    setEmail(localStorage.getItem("username"));
     fetchMessages();
   }, []);
 

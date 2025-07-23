@@ -39,6 +39,10 @@ export default function LoginPage() {
     router.push("/Views/Layout")
 
     const result = await response.json(); 
+     let user = result.username
+     localStorage.setItem("username",user)
+     localStorage.setItem("email",result.email)
+     
     console.log("User logged in:", result);
     setMessage("Login successful!"); 
   } catch (error) {
