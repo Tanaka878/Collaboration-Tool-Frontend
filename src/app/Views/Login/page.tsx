@@ -36,6 +36,8 @@ export default function LoginPage() {
       return;
     }
 
+    router.push("/Views/Layout")
+
     const result = await response.json(); 
     console.log("User logged in:", result);
     setMessage("Login successful!"); 
