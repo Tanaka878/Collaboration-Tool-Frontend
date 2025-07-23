@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import SideNav from '../SideNav';
-import { useRouter } from 'next/navigation';
 import ChatRoom from '../ChatRoom';
 import Notifications from '../Notifications';
 import Calender from '../Calender';
@@ -16,7 +15,6 @@ const Layout = () => {
   
     const [currentView, setCurrentView] = useState('Tickets'); 
   
-  const router = useRouter();
   
   
   
