@@ -7,7 +7,8 @@ import Calender from '../Calender';
 import FileSharing from '../FileSharing';
 import UserProfile from '../UserProfile';
 import WelcomeScreen from '../Welcome';
-import ProjectForm from '../ProjectForm';
+import ProjectForm from '../CreateProject/page';
+import MyProjects from '../MyProjects';
 
 
 const Layout = () => {
@@ -23,7 +24,7 @@ const Layout = () => {
   const renderContent = () => {
     switch (currentView) {
       case 'Project':
-        return <ProjectForm/>;
+        return <MyProjects/>;
       case 'Tickets':
         return <WelcomeScreen />;
       case 'Chat Room':
