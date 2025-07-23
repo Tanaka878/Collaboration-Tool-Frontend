@@ -28,8 +28,8 @@ const Layout = () => {
         return <ProjectForm/>;
       case 'Tickets':
         return <WelcomeScreen />;
-      case 'Agents':
-        return <Calender />; 
+      case 'Chat Room':
+        return <ChatRoom />; 
       case 'File Sharing':
         return <FileSharing />; 
       case 'Notifications':
