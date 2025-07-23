@@ -18,8 +18,7 @@ export default function MyProjects() {
     if (email) {
       fetchProjects(email);
     } else {
-      setError("No email found in local storage.");
-      setLoading(false);
+     fetchProjects("")
     }
   }, [email]);
 
