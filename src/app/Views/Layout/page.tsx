@@ -35,7 +35,7 @@ const Layout = () => {
       case 'Notifications':
           return <UserProfile/>;
         
-      case 'Settings':
+      case 'Logout':
         return <Calender/>;
 
       default:

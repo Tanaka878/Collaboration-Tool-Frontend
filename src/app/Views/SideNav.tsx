@@ -1,6 +1,7 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FaChartBar, FaClipboardList, FaUser, FaBell, FaUsers, FaCalendar } from "react-icons/fa";
-import { MdDashboard, MdSettings } from "react-icons/md";
+import { MdDashboard, MdLogout, MdSettings } from "react-icons/md";
 
 interface SideNavProps {
   isSidebarOpen: boolean;
@@ -15,8 +16,17 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
     { icon: <FaUsers className="w-5 h-5" />, label: 'File Sharing' },
     { icon: <FaCalendar className="w-5 h-5" />, label: 'Calendar' },
     { icon: <FaBell className="w-5 h-5" />, label: 'Notifications' },
-    { icon: <MdSettings className="w-5 h-5" />, label: 'Settings' },
   ];
+
+  const router = useRouter();
+  // Add logout handler
+  const handleLogout = () => {
+    // Example: clear localStorage and reload (customize for your auth)
+    localStorage.clear();
+    router.push('/Views/Login'); // Redirect to login page
+    
+
+  };
 
   return (
     <div className={`bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 h-full ${isSidebarOpen ? 'w-64' : 'w-16'} transition-all duration-300 ease-in-out shadow-2xl border-r border-slate-700/50`}>
@@ -106,6 +116,24 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
               </li>
             );
           })}
+          {/* Add Logout button at the bottom */}
+          <li>
+            <button
+              onClick={handleLogout}
+              className={`
+                relative flex items-center w-full px-3 py-3 rounded-xl
+                transition-all duration-200 ease-in-out group
+                ${isSidebarOpen ? 'justify-start' : 'justify-center'}
+                text-slate-400 hover:text-white hover:bg-red-700/50 hover:scale-105
+              `}
+              title={!isSidebarOpen ? 'Logout' : ''}
+            >
+              <MdLogout className="w-5 h-5" />
+              {isSidebarOpen && (
+                <span className="ml-4 whitespace-nowrap font-medium">Logout</span>
+              )}
+            </button>
+          </li>
         </ul>
 
         {/* Bottom decorative element */}
