@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -39,24 +40,13 @@ export default function SignupPage() {
     }
   };
 
-  const roleIcons = {
-    USER: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    ),
-    ADMIN: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-    GUEST: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  };
 
+  const router = useRouter();
+
+  function homeNavigation(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    event.preventDefault();
+    router.push("/Views/Login");
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-50 px-4">
       <div className="max-w-md w-full">
@@ -186,6 +176,14 @@ export default function SignupPage() {
                   Create Account
                 </span>
               )}
+            </button>
+
+            <button
+              type="button"
+              onClick={homeNavigation}
+              className="w-full py-2 px-4 mt-2 bg-white border border-green-500 text-green-700 font-semibold rounded-xl hover:bg-green-50 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-200 transition-all duration-300 shadow"
+            >
+              Already have an account?
             </button>
 
 
