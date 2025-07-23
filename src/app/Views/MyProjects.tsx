@@ -33,6 +33,7 @@ export default function MyProjects() {
       if (!res.ok) throw new Error("Failed to fetch projects");
 
       const data = await res.json();
+      console.log("Fetched projects:", data);
       setProjects(data);
     } catch (err) {
       setError((err as Error).message);
