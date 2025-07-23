@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
@@ -19,25 +19,34 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await fetch("http://localhost:8080/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const result = await response.text();
-      setMessage(result);
-    } catch (error) {
-      console.error("Login error:", error);
-      setMessage("Something went wrong.");
-    } finally {
-      setIsLoading(false);
+  e.preventDefault();
+  setIsLoading(true);
+  try {
+    const response = await fetch("http://localhost:8080/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData), 
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      setMessage(errorText || "Login failed.");
+      return;
     }
-  };
+
+    const result = await response.json(); 
+    console.log("User logged in:", result);
+    setMessage("Login successful!"); 
+  } catch (error) {
+    console.error("Login error:", error);
+    setMessage("Something went wrong.");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   function handleSignUp(): void {
     router.push("/Views/SignUp");
@@ -85,12 +94,12 @@ export default function LoginPage() {
                 </div>
                 <input
                   type="text"
-                  name="username"
-                  value={formData.username}
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                   className="w-full text-black pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 bg-gray-50 focus:bg-white"
-                  placeholder="Enter your username"
+                  placeholder="Enter your email"
                 />
               </div>
             </div>
