@@ -3,26 +3,27 @@
 import { useEffect, useState } from "react";
 
 interface Project {
-  projectName: string;
+  id: number;
+  name: string;
   description: string;
   startDate: string;  // ISO string
   finishDate: string; // ISO string
   status: string;
-  // optionally tasks and teamMembers if you want to edit them too
 }
 
 export default function MyProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   const email = typeof window !== "undefined" ? localStorage.getItem("email") : null;
 
   useEffect(() => {
-    fetchProjects(email || "");
-  }, []);
+    if (email) {
+      fetchProjects(email);
+    }
+  }, [email]);
 
   async function fetchProjects(userEmail: string) {
     try {
@@ -43,9 +44,9 @@ export default function MyProjects() {
     }
   }
 
-  async function fetchProjectForEdit(projectName: string) {
+  async function fetchProjectForEdit(id: number) {
     try {
-      const res = await fetch(`http://localhost:8080/api/projects/project/${encodeURIComponent(projectName)}`);
+      const res = await fetch(`http://localhost:8080/api/projects/project/${id}`);
       if (!res.ok) throw new Error("Failed to fetch project details");
       const data = await res.json();
       setEditingProject(data);
@@ -66,7 +67,7 @@ export default function MyProjects() {
     if (!editingProject) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/projects/update/${encodeURIComponent(editingProject.projectName)}`, {
+      const res = await fetch(`http://localhost:8080/api/projects/update/${editingProject.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingProject),
@@ -82,15 +83,15 @@ export default function MyProjects() {
     }
   }
 
-  async function deleteProject(projectName: string) {
+  async function deleteProject(id: number) {
     try {
-      const res = await fetch(`http://localhost:8080/api/projects/delete/${encodeURIComponent(projectName)}`, {
+      const res = await fetch(`http://localhost:8080/api/projects/delete/${id}`, {
         method: "DELETE",
       });
 
       if (!res.ok) throw new Error("Failed to delete project");
 
-      setProjects(prev => prev.filter(p => p.projectName !== projectName));
+      setProjects(prev => prev.filter(p => p.id !== id));
     } catch (err) {
       alert((err as Error).message);
     }
@@ -104,24 +105,27 @@ export default function MyProjects() {
       {error && <p className="text-center text-red-500">{error}</p>}
 
       <div className="space-y-4">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div
-            key={index}
+            key={project.id}
             className="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex justify-between items-center"
           >
             <div>
-              <h2 className="text-xl font-semibold text-blue-600">{project.projectName}</h2>
+              <h2 className="text-xl font-semibold text-blue-600">{project.name}</h2>
               <p className="text-gray-700 mt-2">{project.description}</p>
+              <p className="text-sm text-gray-500 mt-1">
+                {project.startDate} → {project.finishDate} | <strong>{project.status}</strong>
+              </p>
             </div>
             <div className="space-x-2">
               <button
-                onClick={() => fetchProjectForEdit(project.projectName)}
+                onClick={() => fetchProjectForEdit(project.id)}
                 className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
               >
                 Update
               </button>
               <button
-                onClick={() => deleteProject(project.projectName)}
+                onClick={() => deleteProject(project.id)}
                 className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
               >
                 Delete
@@ -131,21 +135,19 @@ export default function MyProjects() {
         ))}
       </div>
 
-      {/* Edit form modal */}
       {editingProject && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-lg w-full p-6">
-            <h2 className="text-2xl font-bold mb-4">Edit Project: {editingProject.projectName}</h2>
+            <h2 className="text-2xl font-bold mb-4">Edit Project: {editingProject.name}</h2>
             <div className="space-y-4">
               <input
                 type="text"
-                name="projectName"
-                value={editingProject.projectName}
+                name="name"
+                value={editingProject.name}
                 readOnly
                 className="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
               />
-              <input
-                type="text"
+              <textarea
                 name="description"
                 value={editingProject.description || ""}
                 onChange={handleInputChange}
