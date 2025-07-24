@@ -9,6 +9,7 @@ import UserProfile from '../UserProfile';
 import WelcomeScreen from '../Welcome';
 import ProjectForm from '../CreateProject/page';
 import MyProjects from '../MyProjects';
+import ProjectsView from '../ProjectsView';
 
 
 const Layout = () => {
@@ -24,7 +25,7 @@ const Layout = () => {
   const renderContent = () => {
     switch (currentView) {
       case 'Project':
-        return <MyProjects/>;
+        return <ProjectsView/>;
       case 'Tickets':
         return <WelcomeScreen />;
       case 'Chat Room':
