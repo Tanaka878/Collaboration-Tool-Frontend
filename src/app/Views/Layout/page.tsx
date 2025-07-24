@@ -33,7 +33,7 @@ const Layout = () => {
       case 'File Sharing':
         return <FileSharing />; 
       case 'Notifications':
-          return <UserProfile/>;
+          return <Notifications/>;
         
       case 'Logout':
         return <Calender/>;
