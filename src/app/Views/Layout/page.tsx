@@ -9,6 +9,7 @@ import UserProfile from '../UserProfile';
 import WelcomeScreen from '../Welcome';
 import ProjectsView from '../ProjectsView';
 import ReminderCalendar from '../ReminderCalender';
+import DrawingBoard from '../DrawingBoard';
 
 
 const Layout = () => {
@@ -38,7 +39,7 @@ const Layout = () => {
         return <ReminderCalendar/>;
 
         case 'Board':
-        return <ReminderCalendar/>;
+        return <DrawingBoard/>;
 
       default:
         return <ReminderCalendar />;
