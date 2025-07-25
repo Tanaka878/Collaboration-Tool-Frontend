@@ -16,10 +16,9 @@ export default function CreateProjectForm() {
       startDate: '',
       finishDate: '',
       status: 'Pending',
-      teamMembers: [{ email: '' }], // Only email field as per TeamMember entity
+      teamMembers: [{ email: '' }],
     },
   ]);
-
 
   const NavigateBack = () => {
     window.history.back();
@@ -40,7 +39,7 @@ export default function CreateProjectForm() {
         startDate: '',
         finishDate: '',
         status: 'Pending',
-        teamMembers: [{ email: '' }], // Only email field
+        teamMembers: [{ email: '' }],
       },
     ]);
   };
@@ -57,7 +56,7 @@ export default function CreateProjectForm() {
 
   const addTeamMember = (taskIndex: number) => {
     const updatedTasks = [...tasks];
-    updatedTasks[taskIndex].teamMembers.push({ email: '' }); // Only email field
+    updatedTasks[taskIndex].teamMembers.push({ email: '' });
     setTasks(updatedTasks);
   };
 
@@ -82,17 +81,13 @@ export default function CreateProjectForm() {
     try {
       const response = await fetch('http://localhost:8080/api/projects/create', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       console.log("Payload sent:", payload);
 
-      if (!response.ok) {
-        throw new Error(`Server responded with status ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Server responded with status ${response.status}`);
 
       const result = await response.json();
       alert('Project created successfully!');
@@ -104,78 +99,74 @@ export default function CreateProjectForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-200 p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 mb-2">
-            Create New Project
-          </h1>
-          <p className="text-slate-300 text-lg">Build something amazing with your team</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2">Create New Project</h1>
+          <p className="text-gray-600 text-lg">Build something amazing with your team</p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="bg-slate-800/40 backdrop-blur-lg border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
-            {/* Project Details Section */}
-            <div className="p-6 md:p-8 border-b border-slate-700/50">
+          <div className="bg-white border border-gray-300 rounded-2xl shadow-md overflow-hidden">
+            <div className="p-6 md:p-8 border-b border-gray-300">
               <div className="flex items-center mb-6">
-                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full mr-4"></div>
-                <h2 className="text-2xl font-bold text-white">Project Details</h2>
+                <div className="w-2 h-8 bg-gray-500 rounded-full mr-4"></div>
+                <h2 className="text-2xl font-bold text-gray-800">Project Details</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-300">Project Name</label>
+                  <label className="block text-sm font-medium text-gray-600">Project Name</label>
                   <input
                     type="text"
-                    placeholder="Enter project name"
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70"
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                    placeholder="Enter project name"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-300">Description</label>
+                  <label className="block text-sm font-medium text-gray-600">Description</label>
                   <input
                     type="text"
-                    placeholder="Project description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70"
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                    placeholder="Project description"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-300">Start Date</label>
+                  <label className="block text-sm font-medium text-gray-600">Start Date</label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70"
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-300">Finish Date</label>
+                  <label className="block text-sm font-medium text-gray-600">Finish Date</label>
                   <input
                     type="date"
                     value={finishDate}
                     onChange={(e) => setFinishDate(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70"
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
                     required
                   />
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-300">Status</label>
+                  <label className="block text-sm font-medium text-gray-600">Status</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:bg-slate-700/70"
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
                     required
                   >
                     <option value="In Progress">In Progress</option>
@@ -190,10 +181,10 @@ export default function CreateProjectForm() {
             <div className="p-6 md:p-8">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
-                  <div className="w-2 h-8 bg-gradient-to-b from-green-500 to-teal-500 rounded-full mr-4"></div>
-                  <h2 className="text-2xl font-bold text-white">Tasks</h2>
+                  <div className="w-2 h-8 bg-gray-400 rounded-full mr-4"></div>
+                  <h2 className="text-2xl font-bold text-gray-800">Tasks</h2>
                 </div>
-                <span className="text-sm text-slate-400 bg-slate-700/50 px-3 py-1 rounded-full">
+                <span className="text-sm text-gray-500 bg-gray-200 px-3 py-1 rounded-full">
                   {tasks.length} task{tasks.length !== 1 ? 's' : ''}
                 </span>
               </div>
@@ -202,12 +193,11 @@ export default function CreateProjectForm() {
                 {tasks.map((task, taskIndex) => (
                   <div
                     key={taskIndex}
-                    className="relative bg-slate-700/30 border border-slate-600/50 rounded-2xl p-6 hover:bg-slate-700/40 transition-all duration-300"
+                    className="relative bg-gray-50 border border-gray-300 rounded-2xl p-6 hover:bg-gray-100 transition-all"
                   >
-                    {/* Task Header */}
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-white flex items-center">
-                        <span className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        <span className="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center text-sm font-bold mr-3">
                           {taskIndex + 1}
                         </span>
                         Task {taskIndex + 1}
@@ -216,128 +206,85 @@ export default function CreateProjectForm() {
                         <button
                           type="button"
                           onClick={() => removeTask(taskIndex)}
-                          className="px-4 py-2 bg-red-600/20 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-600/30 transition-all duration-200 font-medium text-sm"
+                          className="px-4 py-2 bg-red-100 text-red-600 border border-red-300 rounded-lg hover:bg-red-200 text-sm"
                         >
                           Remove Task
                         </button>
                       )}
                     </div>
 
-                    {/* Task Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-slate-300">Task Name</label>
-                        <input
-                          type="text"
-                          placeholder="Enter task name"
-                          value={task.name}
-                          onChange={(e) => handleTaskChange(taskIndex, 'name', e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-600/50 border border-slate-500 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-slate-300">Description</label>
-                        <input
-                          type="text"
-                          placeholder="Task description"
-                          value={task.description}
-                          onChange={(e) => handleTaskChange(taskIndex, 'description', e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-600/50 border border-slate-500 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-slate-300">Start Date</label>
-                        <input
-                          type="date"
-                          value={task.startDate}
-                          onChange={(e) => handleTaskChange(taskIndex, 'startDate', e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-600/50 border border-slate-500 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="block text-sm font-medium text-slate-300">Finish Date</label>
-                        <input
-                          type="date"
-                          value={task.finishDate}
-                          onChange={(e) => handleTaskChange(taskIndex, 'finishDate', e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-600/50 border border-slate-500 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2 md:col-span-2">
-                        <label className="block text-sm font-medium text-slate-300">Status</label>
-                        <select
-                          value={task.status}
-                          onChange={(e) => handleTaskChange(taskIndex, 'status', e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-600/50 border border-slate-500 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                        >
-                          <option value="Pending">Pending</option>
-                          <option value="In Progress">In Progress</option>
-                          <option value="Completed">Completed</option>
-                        </select>
-                      </div>
+                      <input
+                        type="text"
+                        value={task.name}
+                        onChange={(e) => handleTaskChange(taskIndex, 'name', e.target.value)}
+                        placeholder="Task name"
+                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                        required
+                      />
+                      <input
+                        type="text"
+                        value={task.description}
+                        onChange={(e) => handleTaskChange(taskIndex, 'description', e.target.value)}
+                        placeholder="Description"
+                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                        required
+                      />
+                      <input
+                        type="date"
+                        value={task.startDate}
+                        onChange={(e) => handleTaskChange(taskIndex, 'startDate', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                        required
+                      />
+                      <input
+                        type="date"
+                        value={task.finishDate}
+                        onChange={(e) => handleTaskChange(taskIndex, 'finishDate', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                        required
+                      />
+                      <select
+                        value={task.status}
+                        onChange={(e) => handleTaskChange(taskIndex, 'status', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all md:col-span-2"
+                      >
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                      </select>
                     </div>
 
                     {/* Team Members */}
-                    <div className="bg-slate-600/20 rounded-xl p-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-lg font-semibold text-white flex items-center">
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                          </svg>
-                          Team Members
-                        </h4>
-                        <span className="text-sm text-slate-400 bg-slate-700/50 px-2 py-1 rounded-full">
-                          {task.teamMembers.length} member{task.teamMembers.length !== 1 ? 's' : ''}
-                        </span>
-                      </div>
-
-                      <div className="space-y-4">
-                        {task.teamMembers.map((member, memberIndex) => (
-                          <div key={memberIndex} className="bg-slate-500/20 rounded-lg p-4">
-                            <div className="grid grid-cols-1 gap-4">
-                              <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-300">Email</label>
-                                <input
-                                  type="email"
-                                  placeholder="member@email.com"
-                                  value={member.email}
-                                  onChange={(e) =>
-                                    handleMemberChange(taskIndex, memberIndex, 'email', e.target.value)
-                                  }
-                                  className="w-full px-3 py-2 bg-slate-500/50 border border-slate-400 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                                  required
-                                />
-                              </div>
-                            </div>
-
-                            {task.teamMembers.length > 1 && (
-                              <button
-                                type="button"
-                                onClick={() => removeTeamMember(taskIndex, memberIndex)}
-                                className="mt-3 w-full px-4 py-2 bg-red-600/20 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-600/30 transition-all duration-200 font-medium text-sm"
-                              >
-                                Remove Member
-                              </button>
-                            )}
-                          </div>
-                        ))}
-
-                        <button
-                          type="button"
-                          onClick={() => addTeamMember(taskIndex)}
-                          className="w-full px-4 py-3 bg-gradient-to-r from-green-600/20 to-teal-600/20 text-green-400 border border-green-500/30 rounded-lg hover:from-green-600/30 hover:to-teal-600/30 transition-all duration-200 font-medium"
-                        >
-                          + Add Team Member
-                        </button>
-                      </div>
+                    <div className="bg-gray-100 border border-gray-300 rounded-xl p-4">
+                      {task.teamMembers.map((member, memberIndex) => (
+                        <div key={memberIndex} className="mb-4">
+                          <input
+                            type="email"
+                            value={member.email}
+                            onChange={(e) => handleMemberChange(taskIndex, memberIndex, 'email', e.target.value)}
+                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+                            placeholder="member@email.com"
+                            required
+                          />
+                          {task.teamMembers.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => removeTeamMember(taskIndex, memberIndex)}
+                              className="mt-2 w-full px-4 py-2 bg-red-100 text-red-600 border border-red-300 rounded-lg hover:bg-red-200 text-sm"
+                            >
+                              Remove Member
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => addTeamMember(taskIndex)}
+                        className="w-full px-4 py-2 bg-gray-500 text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-300 transition-all"
+                      >
+                        + Add Team Member
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -345,29 +292,28 @@ export default function CreateProjectForm() {
                 <button
                   type="button"
                   onClick={addTask}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-blue-400 border border-blue-500/30 rounded-xl hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300 font-medium text-lg"
+                  className="w-full px-6 py-4 bg-gray-200 text-gray-800 border border-gray-300 rounded-xl hover:bg-gray-300 transition-all font-medium text-lg"
                 >
                   + Add New Task
                 </button>
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="p-6 md:p-8 bg-slate-700/20 border-t border-slate-700/50">
+            {/* Submit Section */}
+            <div className="p-6 md:p-8 bg-gray-100 border-t border-gray-300">
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-white rounded-xl hover:from-blue-700 hover:via-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full px-8 py-4 bg-gray-700 text-white rounded-xl hover:bg-gray-800 transition-all font-semibold text-lg shadow"
               >
                 🚀 Create Project
               </button>
-
-                <button
+              <button
                 type="button"
                 onClick={NavigateBack}
-                className="mt-4 w-full px-8 py-3 bg-gradient-to-r from-slate-600 via-blue-700 to-slate-600 text-white rounded-xl hover:from-slate-700 hover:via-blue-800 hover:to-slate-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-                >
+                className="mt-4 w-full px-8 py-3 bg-gray-500 text-white rounded-xl hover:bg-gray-600 transition-all font-semibold text-lg shadow"
+              >
                 ← Back
-                </button>
+              </button>
             </div>
           </div>
         </form>

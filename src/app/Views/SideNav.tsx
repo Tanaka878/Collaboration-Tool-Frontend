@@ -21,34 +21,31 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
   const router = useRouter();
   // Add logout handler
   const handleLogout = () => {
-    // Example: clear localStorage and reload (customize for your auth)
     localStorage.clear();
     router.push('/Views/Login'); // Redirect to login page
-    
-
   };
 
   return (
-    <div className={`bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 h-full ${isSidebarOpen ? 'w-64' : 'w-16'} transition-all duration-300 ease-in-out shadow-2xl border-r border-slate-700/50`}>
+    <div className={`bg-gradient-to-b from-[#064789] via-[#427aa1] to-[#064789] h-full ${isSidebarOpen ? 'w-64' : 'w-16'} transition-all duration-300 ease-in-out shadow-2xl border-r border-[#064789]/50`}>
       {/* Header Section */}
       <div className="relative">
         {/* Welcome Section */}
-        <div className={`px-4 py-6 border-b border-slate-700/50 ${isSidebarOpen ? '' : 'px-2'}`}>
+        <div className={`px-4 py-6 border-b border-[#064789]/50 ${isSidebarOpen ? '' : 'px-2'}`}>
           {isSidebarOpen ? (
             <div className="flex items-center space-x-3">
               {/* Avatar */}
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#064789] to-[#427aa1] flex items-center justify-center shadow-lg">
                 <FaUser className="w-5 h-5 text-white" />
               </div>
               {/* Welcome Text */}
               <div className="flex flex-col">
                 <h3 className="text-white font-semibold text-lg">Welcome back!</h3>
-                <p className="text-slate-400 text-sm">Ready to be productive?</p>
+                <p className="text-[#ebf2fa] text-sm">Ready to be productive?</p>
               </div>
             </div>
           ) : (
             <div className="flex justify-center">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#064789] to-[#427aa1] flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200">
                 <FaUser className="w-5 h-5 text-white" />
               </div>
             </div>
@@ -56,7 +53,7 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
         </div>
 
         {/* Decorative gradient line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#427aa1]/50 to-transparent"></div>
       </div>
 
       {/* Navigation Section */}
@@ -73,31 +70,28 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
                     transition-all duration-200 ease-in-out group
                     ${isSidebarOpen ? 'justify-start' : 'justify-center'}
                     ${isActive 
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25 scale-105' 
-                      : 'text-slate-400 hover:text-white hover:bg-slate-700/50 hover:scale-105'
+                      ? 'bg-gradient-to-r from-[#064789] to-[#427aa1] text-white shadow-lg shadow-[#064789]/25 scale-105' 
+                      : 'text-[#ebf2fa] hover:text-white hover:bg-[#064789]/50 hover:scale-105'
                     }
                   `}
                   title={!isSidebarOpen ? item.label : ''}
                 >
                   {/* Active indicator */}
                   {isActive && (
-                    <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-400 to-purple-500 rounded-full shadow-lg"></div>
+                    <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-[#427aa1] to-[#064789] rounded-full shadow-lg"></div>
                   )}
                   
                   {/* Icon */}
-                  <div className={`
-                    flex-shrink-0 transition-all duration-200
-                    ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'}
-                    ${!isSidebarOpen ? 'mx-auto' : ''}
-                  `}>
+                  <div className={`flex-shrink-0 transition-all duration-200
+                    ${isActive ? 'text-white' : 'text-[#ebf2fa] group-hover:text-white'}
+                    ${!isSidebarOpen ? 'mx-auto' : ''}`}>
                     {item.icon}
                   </div>
                   
                   {/* Label */}
                   {isSidebarOpen && (
-                    <span className={`
-                      ml-4 whitespace-nowrap font-medium transition-all duration-200
-                      ${isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'}
+                    <span className={`ml-4 whitespace-nowrap font-medium transition-all duration-200
+                      ${isActive ? 'text-white' : 'text-[#ebf2fa] group-hover:text-white'}
                     `}>
                       {item.label}
                     </span>
@@ -105,12 +99,12 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
 
                   {/* Hover glow effect */}
                   {!isActive && (
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-gradient-to-r from-blue-500/10 to-purple-500/10 transition-opacity duration-200"></div>
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-gradient-to-r from-[#064789]/10 to-[#427aa1]/10 transition-opacity duration-200"></div>
                   )}
 
                   {/* Active glow effect */}
                   {isActive && (
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-sm"></div>
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#064789]/20 to-[#427aa1]/20 blur-sm"></div>
                   )}
                 </button>
               </li>
@@ -124,7 +118,7 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
                 relative flex items-center w-full px-3 py-3 rounded-xl
                 transition-all duration-200 ease-in-out group
                 ${isSidebarOpen ? 'justify-start' : 'justify-center'}
-                text-slate-400 hover:text-white hover:bg-red-700/50 hover:scale-105
+                text-[#ebf2fa] hover:text-white hover:bg-red-700/50 hover:scale-105
               `}
               title={!isSidebarOpen ? 'Logout' : ''}
             >
@@ -138,7 +132,7 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
 
         {/* Bottom decorative element */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className={`w-12 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent ${isSidebarOpen ? 'w-32' : 'w-12'} transition-all duration-300`}></div>
+          <div className={`w-12 h-px bg-gradient-to-r from-transparent via-[#064789] to-transparent ${isSidebarOpen ? 'w-32' : 'w-12'} transition-all duration-300`}></div>
         </div>
       </nav>
 
@@ -153,7 +147,7 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
             transform: translateY(-50%);
             margin-left: 12px;
             padding: 8px 12px;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(6, 71, 137, 0.95);
             backdrop-filter: blur(8px);
             color: white;
             border-radius: 8px;
@@ -175,7 +169,7 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
             height: 0;
             border-top: 6px solid transparent;
             border-bottom: 6px solid transparent;
-            border-right: 6px solid rgba(15, 23, 42, 0.95);
+            border-right: 6px solid rgba(6, 71, 137, 0.95);
             z-index: 50;
           }
         `}</style>
