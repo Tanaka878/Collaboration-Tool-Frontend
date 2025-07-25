@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import SideNav from '../SideNav';
 import ChatRoom from '../ChatRoom';
 import Notifications from '../Notifications';
-import Calender from '../Calender';
+import Calender from '../ReminderCalender';
 import FileSharing from '../FileSharing';
 import UserProfile from '../UserProfile';
 import WelcomeScreen from '../Welcome';
-import ProjectForm from '../CreateProject/page';
-import MyProjects from '../MyProjects';
 import ProjectsView from '../ProjectsView';
+import ReminderCalendar from '../ReminderCalender';
 
 
 const Layout = () => {
@@ -35,11 +34,14 @@ const Layout = () => {
       case 'Notifications':
           return <Notifications/>;
         
-      case 'Logout':
-        return <Calender/>;
+      case 'Calender':
+        return <ReminderCalendar/>;
+
+        case 'Board':
+        return <ReminderCalendar/>;
 
       default:
-        return <Notifications />;
+        return <ReminderCalendar />;
     }
   };
 

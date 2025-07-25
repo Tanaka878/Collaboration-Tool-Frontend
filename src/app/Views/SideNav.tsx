@@ -14,8 +14,10 @@ const SideNav: React.FC<SideNavProps> = ({ isSidebarOpen, onSelectPage, currentV
     { icon: <MdDashboard className="w-5 h-5" />, label: 'Project' },
     { icon: <FaClipboardList className="w-5 h-5" />, label: 'Chat Room' },
     { icon: <FaUsers className="w-5 h-5" />, label: 'File Sharing' },
-    { icon: <FaCalendar className="w-5 h-5" />, label: 'Calendar' },
+    { icon: <FaCalendar className="w-5 h-5" />, label: 'Calender' },
     { icon: <FaBell className="w-5 h-5" />, label: 'Notifications' },
+        { icon: <FaClipboardList className="w-5 h-5" />, label: 'Board' },
+
   ];
 
   const router = useRouter();
